@@ -176,7 +176,8 @@ func (c Client) Upload(localPath string, remotePath string) (err error) {
 	}
 	defer ftp.Close()
 
-	remote, err := ftp.Create(remotePath)
+	// remote, err := ftp.Create(remotePath)
+	remote, err := ftp.OpenFile(remotePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC)
 	if err != nil {
 		return
 	}
