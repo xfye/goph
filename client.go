@@ -5,6 +5,7 @@ package goph
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net"
@@ -172,7 +173,7 @@ func (c Client) Upload(localPath string, remotePath string) (err error) {
 
 	ftp, err := c.NewSftp()
 	if err != nil {
-		return
+		return fmt.Errorf("NewSftp failed: %w", err)
 	}
 	defer ftp.Close()
 
